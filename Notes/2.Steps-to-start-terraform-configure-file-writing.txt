@@ -1,0 +1,19 @@
+1. Mulinma terraform hashicorp web site ek gihilla terraform exe file ek download krgtta
+
+2. eta passe eke thiynwa exe file ek aran gihin mata kamathi thanaka thiyna folder ekkt e exe file ek copy krgtta (note that me exex file eke install kale nha copy kala withri)
+
+3. eta passe environmental variables walt gihin eke system varaibales walt gihin eke path eke path variable ekk widiyt ara terraform exex file ek thiynwa folder eke path eka denwa 
+
+4. eta passe cmd eke terraform -v ghuwam version ek pennnwa (ehma pennuwaoth eke theruma terraform hariyt install wela kiya eka, pennanne nattnm eke theruma hariyt install wela na kiyna eka)
+
+Note that : me install kirima walngu wenne windows walt withri , macos walt wenwam krmayk thiynwa , Linux based os walt wenama krmayka thiynwa , e hama krmayakma terrfdaorm install kraddi e page eke step hy step daala thiynwa
+
+5. eta passe mage code file eke thiyna wiiyt code krgena ynwa 
+
+
+6. elagata terraform .tf file ek liyla iwar wela api krnna one menna me command ek ghna ek:
+
+	" terraform init "
+
+mekn terraform ekn adla krna provider , provider plugins okkomainstall krla setup krla denwa provision ekt adlwa one krna providers set ek ehma 
+
