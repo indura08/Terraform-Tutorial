@@ -1,0 +1,102 @@
+AWS Documentation for terraform: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+
+What is AMI?
+-------------
+
+AMI stands for Amazon Machine Image.
+
+Think of it like this:
+
+When you want to launch a new computer (virtual machine) on AWS, you need an operating system + software setup ready to go.
+
+An AMI is like a template or a snapshot of a computer’s disk — it contains everything your new VM needs to start running:
+
+	The operating system (like Linux or Windows)
+
+	Installed software
+
+	Configurations and settings
+
+
+Analogy:
+If launching a virtual machine is like baking a cake, the AMI is like your cake recipe and ingredients all bundled together, ready to bake that exact cake every time.
+
+
+Why do you need an AMI?
+-----------------------
+
+AWS uses the AMI to know what OS and software to install on your new EC2 instance.
+
+Without specifying an AMI, AWS wouldn't know what your virtual machine should look like.
+
+
+How do you get an AMI?
+------------------------
+
+AWS provides many official AMIs (Amazon Linux, Ubuntu, Windows, etc.)
+
+You can also create your own AMI (custom images with your setup)
+
+Example in Terraform:
+
+resource "aws_instance" "my_vm" {
+  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux AMI ID
+  instance_type = "t2.micro"
+}
+
+
+Here, "ami-0c55b159cbfafe1f0" is the ID of a specific AMI (Amazon Linux in this case) that AWS knows about.
+
+
+Q: so i can go to aws account and setup os , t2.micros or t3.micros and then network bounds and etc for a ec2 instance, and i don't use ami, why why we need ami? im super confused
+
+A: 
+🔁 Yes, you can set up an EC2 manually
+
+When you go to your AWS Console and click:
+
+"Launch Instance" → choose Ubuntu or Amazon Linux → select t2.micro → configure network and storage...
+
+You're actually doing all of this manually:
+
+Picking an operating system ✅
+
+Choosing the instance type (like t2.micro) ✅
+
+Setting up networking, storage, and more ✅
+
+💡 So… where does AMI fit into this?
+When you pick an OS on AWS manually (like Ubuntu), behind the scenes, AWS is using an AMI for that OS.
+
+✅ You are using an AMI — even if you don’t realize it.
+It’s required to create an EC2 instance. It's just that when you click buttons in the web console, AWS picks the AMI for you (based on the OS you select).
+
+🧠 So What Exactly Is an AMI?
+Let’s say:
+
+	You want a server that runs Ubuntu 20.04
+
+	That server needs Node.js and Nginx
+
+	You want that server exactly like that every time
+
+You create or select an AMI that has:
+
+	Ubuntu 20.04
+
+	Node.js installed
+
+	Nginx installed
+
+Now you can launch 100 servers with the same setup using that AMI — super fast and consistent.
+
+🎯 Why is AMI important in Terraform?
+
+Because Terraform automates everything, it needs:
+
+A way to know what OS and setup to start from
+
+You tell it which AMI to use (via the ami = "ami-xxxxxx" line)
+
+Otherwise, Terraform can’t create the virtual machine.
+
