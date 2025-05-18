@@ -22,9 +22,9 @@ resource "aws_instance" "my-frist-ec2-instance" {
   ami           = "ami-0c1ac8a41498c1a9c" #this is a ami for ubuntu server 24.04 LTS
   instance_type = "t3.micro"
 
-  # tags = {
-  #   Name = "Hellow world"
-  # }
+  tags = {
+    Name = "ubuntu-server-made-with-terrafrom"
+  }
   
 }
 
@@ -33,3 +33,6 @@ resource "aws_instance" "my-frist-ec2-instance" {
 //  1. terraform init
 //  2.terrafrom plan: this will steup what are we gonna provision and show us a output, so this is help full to see everyhting before applying it and ruining production if something has gone wrong
 //  3.terraform apply: to run our script and do the provisioninig
+
+//in yerrafrom no matter how much time we run terraform apply it is only creating 1 resouces
+//api kochchr terrafrom run command ek ghuwath aluthing , nwatha nawatha resources hdenne nha , hdena ek hdeenne ak parai 
