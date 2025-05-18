@@ -1,0 +1,38 @@
+✅ What is an "Instance Type" in AWS?
+----------------------------------------
+
+When you create an EC2 instance (a virtual machine), you need to choose how powerful it should be — that means deciding:
+
+	How much CPU (processing power)?
+
+	How much RAM (memory)?
+
+	What kind of performance?
+
+That "configuration" is called the instance type.
+
+✅ Examples of Instance Types
+
+Here are some common ones (especially free-tier friendly):
+
+| Instance Type | vCPU | RAM  | Free Tier?            |
+| ------------- | ---- | ---- | --------------------- |
+| `t2.micro`    | 1    | 1 GB | ✅ Yes                 |
+| `t3.micro`    | 2    | 1 GB | ✅ Yes (in some cases) |
+| `t2.small`    | 1    | 2 GB | ❌ No                  |
+| `t3.medium`   | 2    | 4 GB | ❌ No                  |
+
+So, when you choose t2.micro, you're saying:
+
+"Give me a small virtual machine with 1 CPU and 1 GB of RAM."
+
+🆚 t2.micro vs t3.micro — What's the Difference?
+
+| Feature              | `t2.micro`              | `t3.micro`                              |
+| -------------------- | ----------------------- | --------------------------------------- |
+| Older Generation     | Yes                     | No (newer gen)                          |
+| Performance          | OK                      | Better                                  |
+| Free Tier            | Yes                     | Sometimes (depends on AWS region/promo) |
+| Cost After Free Tier | Higher CPU Credits cost | More efficient billing                  |
+
+
