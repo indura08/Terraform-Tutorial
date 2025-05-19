@@ -1,0 +1,195 @@
+--------------------------------------
+✅ What is an Internet Gateway in AWS?
+---------------------------------------
+
+An Internet Gateway (IGW) is like a door that connects your AWS VPC to the internet.
+
+Without it, your EC2 instance (or anything inside your VPC) cannot connect to the internet or be accessed from the internet.
+
+💡 Why do we need it?
+=======================
+
+If you want your EC2 instance to:
+
+Run apt update, npm install, or curl → ✅ You need internet access.
+
+Be accessible via a public IP (like from your browser) → ✅ You need an IGW.
+
+So, Internet Gateway = Internet Access.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------
+✅ What is a Route Table in AWS?
+---------------------------------
+
+A Route Table in AWS is a set of rules (called routes) that control where network traffic goes inside your VPC.
+
+🧠 Think of it like this:
+
+Every subnet in a VPC uses a route table.
+
+A route tells the subnet:
+
+👉 "Hey, if traffic is going to this IP range, send it here."
+
+🧾 A default route table might contain something like:
+
+| Destination   | Target  |
+| ------------- | ------- |
+| `10.0.0.0/16` | `local` |
+
+That means:
+👉 All traffic that stays inside the VPC (e.g., between subnets) will be routed locally.
+
+
+🆚 What is a Custom Route Table?
+===================================
+A Custom Route Table is one you create manually, instead of using the default one.
+
+You create a custom route table when:
+
+You want to control which subnet can access the internet.
+
+You want to route traffic to a NAT Gateway, VPN, or Internet Gateway (IGW).
+
+You want to make different parts of your VPC behave differently.
+
+📦 Example: Making a subnet public
+Let’s say you want your EC2 instance to access the internet. You would:
+
+Create an Internet Gateway (IGW).
+
+Create a custom route table.
+
+Add a route like this:
+
+| Destination | Target             |
+| ----------- | ------------------ |
+| `0.0.0.0/0` | `igw-xxxxxxxxxxxx` |
+
+
+👉 This means:
+"All internet-bound traffic (0.0.0.0/0) goes through the Internet Gateway."
+
+📌 Summary
+
+| Term                    | What it means                                                       |
+| ----------------------- | ------------------------------------------------------------------- |
+| **Route Table**         | Controls traffic flow inside the VPC.                               |
+| **Default Route Table** | The one AWS gives your VPC automatically.                           |
+| **Custom Route Table**  | One that *you* create to control traffic more specifically.         |
+| **Routes**              | Rules inside the route table.                                       |
+| **Subnet Association**  | A subnet must be associated with a route table (default or custom). |
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+✅ What is Route Table Association?
+
+It means:
+You're telling AWS:
+
+“This subnet should use this route table to know how to reach other networks.”
+
+In simple words:
+Route Table Association = Connecting a Subnet to a Route Table
+
+✅ Why is it Important?
+
+Let’s say:
+
+You have two subnets: Public and Private
+
+You want the Public Subnet to connect to the internet
+
+But the Private Subnet should stay internal only
+
+You'd:
+
+Associate the Public Subnet with a Route Table that has a rule like:
+
+Destination: 0.0.0.0/0 → Target: igw-xxxxxx (Internet Gateway)
+
+Associate the Private Subnet with a Route Table that doesn't have this rule.
+
+✅ How to Associate a Route Table to a Subnet in AWS Console?
+
+	Go to VPC Dashboard
+
+	Click on Route Tables
+
+	Choose your route table
+
+	Click on “Subnet Associations”
+
+	Click Edit subnet associations
+
+	Choose the subnet(s) you want to link
+
+Done!
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------
+✅ What Do "Ingress" and "Egress" Mean?
+---------------------------------------
+
+These two words are used when talking about network traffic — data going in or out of something (like your EC2 instance, subnet, or security group).
+
+🚪 Ingress = INCOMING traffic
+------------------------------
+
+This is data coming into your resource
+
+Example: A user visiting your website → request goes into your EC2 instance
+
+Think:
+
+“Who is allowed to enter (INGRESS) into my resource?”
+
+🚪 Egress = OUTGOING traffic
+-----------------------------
+This is data going out from your resource
+
+Example: Your EC2 server fetching updates from the internet → traffic leaves your EC2 instance
+
+Think:
+
+“Who is allowed to exit (EGRESS) from my resource?”
+
+✅ Where You See This in AWS?
+------------------------------
+
+Mostly in Security Groups and Network ACLs (Access Control Lists).
+
+In Security Groups, you define:
+
+Ingress Rules → Who can access my instance? (e.g., allow HTTP or SSH)
+
+Egress Rules → Where can my instance go? (e.g., allow all internet access)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------
+🧠 First: What is a Network Interface (in general)?
+----------------------------------------------------
+
+Imagine your computer as a house 🏠, and the network interface is like the door 🚪 that lets you connect to the outside world (like the internet or a local network).
+
+A network interface is like the hardware or virtual component that allows a device to send and receive data over a network.
+
+Every network interface has:
+
+	An IP address (like your house number 📬)
+
+	A MAC address (like your house’s unique ID 🏷️)
+
+	Maybe other settings like DNS, subnet, etc.
+
+Example from your personal computer:
+
+Your laptop connects to Wi-Fi using a wireless network interface
+
+If you plug in an Ethernet cable, you use a wired network interface
