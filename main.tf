@@ -19,7 +19,7 @@ provider "aws" {
 
 resource "aws_instance" "my-frist-ec2-instance" {
   #config options 
-  ami           = "ami-0c1ac8a41498c1a9c" #this is a ami for ubuntu server 24.04 LTS
+  ami           = "ami-0c1ac8a41498c1a9c" #this is a ami for ubuntu server 24.04 LTS, ami ek gannkota region eka anuwa thami ganna one 
   instance_type = "t3.micro"
 
   tags = {

@@ -193,3 +193,63 @@ Example from your personal computer:
 Your laptop connects to Wi-Fi using a wireless network interface
 
 If you plug in an Ethernet cable, you use a wired network interface
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------
+💡 What is an Elastic IP in AWS?
+---------------------------------
+
+🔌 Simple Definition:
+
+An Elastic IP (EIP) is a static (unchanging) public IP address that you can assign to an EC2 instance.
+
+It’s like getting a fixed phone number 📞 that you can keep and move between phones (EC2 instances), instead of your phone number changing every time you restart your phone.
+
+🧠 Why use an Elastic IP?
+By default, EC2 instances get a public IP when launched — BUT:
+
+	That public IP changes every time you stop/start the instance 😬
+
+	If you want your EC2 to always be reachable (like for a website or API), you need an IP that doesn't change = Elastic IP 💪
+
+So:
+✅ Use Elastic IP if you want a stable, unchanging IP
+❌ Don't need Elastic IP if your app doesn't care about IP changes
+
+🧲 Example Use Case:
+---------------------
+
+You build a small website on an EC2 instance.
+You want users to access it at a fixed IP (e.g., 3.122.45.67).
+Assign an Elastic IP to your EC2.
+Even if your EC2 restarts or is replaced, you can reassign that same Elastic IP to the new EC2.
+
+💰 Is it Free Tier Friendly?
+Yes, but with conditions:
+
+| Situation                                                              | Cost                            |
+| ---------------------------------------------------------------------- | ------------------------------- |
+| You allocate an Elastic IP and assign it to a **running EC2 instance** | ✅ Free                          |
+| You **keep** an Elastic IP but do **not** attach it to a running EC2   | ⚠️ Charged (about \$0.005/hour) |
+| You have **more than 1** Elastic IP                                    | ⚠️ Charged                      |
+
+
+So:
+
+✅ Free Tier Tip:
+Use 1 Elastic IP, and make sure it's attached to a running EC2 instance — then you're good.
+
+📦 Summary (like a cheat sheet):
+
+| Concept     | Meaning                                                   |
+| ----------- | --------------------------------------------------------- |
+| Elastic IP  | A public IP address that doesn’t change                   |
+| Why use it? | So users can always reach your EC2 at the same IP         |
+| Free Tier?  | Yes, as long as it's in use and attached to a running EC2 |
+| Gotchas     | Unused EIPs = money drain 💸                              |
+
+
+
+
