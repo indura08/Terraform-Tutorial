@@ -185,11 +185,11 @@ resource "aws_instance" "ubuntu-server" {
 
               npm install
 
-              cat <<EOF >> .env
-              MONGO_URL="should be copied"
-              PASS_SEC="should be copied"
-              JWT_SEC="should be copied"
-              STRIPE_KEY="shoudl be copied" 
+              cat <<EOT >> .env
+              MONGO_URL="added"
+              PASS_SEC="added"
+              JWT_SEC="added"
+              STRIPE_KEY="added" 
               EOT
 
               npm install -g pm2
