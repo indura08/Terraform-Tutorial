@@ -1,0 +1,56 @@
+🎯 What is the -target Flag in Terraform?
+------------------------------------------
+
+👉 It's used to apply or destroy only specific resources instead of the entire configuration.
+Normally, when you run:
+
+terraform apply
+
+Terraform:
+
+	1. Checks everything in your config
+
+	2. Figures out what needs to change
+
+	3. Applies all changes
+
+But sometimes you only want to create, update, or destroy one specific resource. That’s when -target comes in handy.
+
+🔧 Syntax
+
+	"terraform apply -target=RESOURCE_NAME"
+	
+
+✅ Example:
+------------
+Let’s say you have these resources:
+
+resource "aws_vpc" "main" {
+  ...
+}
+
+resource "aws_instance" "my_vm" {
+  ...
+}
+
+If you only want to apply the EC2 instance, you can run:
+
+	"terraform apply -target=aws_instance.my_vm"
+
+This tells Terraform:
+
+	“Only focus on creating/updating the my_vm EC2 instance. Ignore the rest.”
+	
+ewagema thami terraform destroy ekka mkea use krnnath puluwan , apita one resource ek withrk destroy krgnna 
+
+
+summary:
+
+| Feature  | Description                                              |
+| -------- | -------------------------------------------------------- |
+| Flag     | `-target=resource_type.resource_name`                    |
+| Purpose  | Apply/destroy only a **specific resource**               |
+| Use with | `terraform apply`, `terraform destroy`, `terraform plan` |
+| Example  | `terraform apply -target=aws_s3_bucket.my_bucket`        |
+| Warning  | Can skip important dependencies – use carefully!         |
+

@@ -1,0 +1,94 @@
+🧠 What are Variables in Terraform?
+----------------------------------------
+
+Variables in Terraform are like inputs to your configuration.
+
+Instead of hardcoding values (like region, instance type, etc.), you define variables and reuse them across your configuration. This makes your code:
+
+	1. More flexible
+
+	2. Reusable
+
+	3. Easier to manage and share
+
+🧱 Types of Terraform Variables
+--------------------------------
+
+There are three main types:
+
+| Type                      | Description                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| **Input variables**       | You define them to pass values into modules or main config |
+| **Output variables**      | Used to return values from a module or main config         |
+| **Environment variables** | Set from the OS shell (like `TF_VAR_region`)               |
+
+
+✅ Input Variables
+--------------------
+
+1. Declare in a .tf file (commonly variables.tf):
+
+variable "region" {
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "us-east-1"
+}
+
+2. Use the variable in your config:
+
+provider "aws" {
+  region = var.region
+}
+
+3. Pass the value in different ways:
+
+	Inline:
+
+		terraform apply -var="region=us-west-2"
+
+	From a file (terraform.tfvars):
+	
+		region = "us-west-2"
+
+
+	From environment variable:
+	
+		export TF_VAR_region=us-west-2
+
+Variable Types
+--------------
+
+| Type     | Example                           |
+| -------- | --------------------------------- |
+| `string` | `"us-east-1"`                     |
+| `number` | `2`                               |
+| `bool`   | `true`                            |
+| `list`   | `["a", "b", "c"]`                 |
+| `map`    | `{ key = "value", foo = "bar" }`  |
+| `object` | `{ name = string, age = number }` |
+
+
+🧪 Example: Using Variables
+
+variables.tf
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t2.micro"
+}
+
+
+main.tf
+
+resource "aws_instance" "example" {
+  ami           = "ami-123456"
+  instance_type = var.instance_type
+}
+
+
+📚 Best Practices
+✅ Group all variables in variables.tf
+✅ Create a terraform.tfvars or .tfvars.json for setting values
+✅ Use meaningful descriptions
+✅ Avoid sensitive info in default values (like passwords!)

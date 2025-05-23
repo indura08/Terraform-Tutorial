@@ -1,0 +1,87 @@
+🔍 What is “State” in Terraform?
+---------------------------------
+
+💡 Terraform State = The Memory of Terraform
+
+When you use Terraform to manage infrastructure (like VMs, databases, etc.), it needs a way to keep track of what it already created.
+
+Terraform stores this information in a file called terraform.tfstate.
+
+📦 terraform.tfstate contains:
+---------------------------------
+
+What resources were created (aws_instance, google_bucket, etc.)
+
+Resource metadata (IDs, IPs, names, etc.)
+
+Dependencies between resources
+
+Your current infrastructure configuration
+
+🎯 Purpose of state:
+----------------------
+Helps Terraform know what’s already there
+
+Allows it to figure out what needs to change
+
+Enables commands like plan, apply, destroy to work accurately
+
+📘 Example:
+=============
+
+You write this in your .tf file:
+
+resource "aws_instance" "my_vm" {
+  ami = "ami-123"
+  instance_type = "t2.micro"
+}
+
+When you run terraform apply, Terraform:
+
+	1. Creates the VM.
+
+	2. Saves details (like instance ID) into terraform.tfstate.
+
+So next time, if you change the instance type, Terraform knows exactly what to update, not recreate everything.
+
+
+🛠️ What is terraform state Command?
+------------------------------------
+The terraform state command lets you interact directly with the Terraform state file.
+
+You use it when you want to view, manipulate, or fix state manually.
+
+🧰 Common terraform state subcommands:
+
+| Command                           | What it Does                                                         |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `terraform state list`            | Lists all resources in the state                                     |
+| `terraform state show <resource>` | Shows details of a specific resource in state                        |
+| `terraform state mv`              | Moves a resource in state (e.g., renaming resources)                 |
+| `terraform state rm`              | Removes a resource from the state (without deleting it in real life) |
+| `terraform state pull`            | Outputs the raw state file                                           |
+| `terraform state push`            | Pushes a modified state file (not common anymore)                    |
+
+
+🔥 Example Use Case
+--------------------
+Let’s say you renamed a resource in your .tf file:
+
+- resource "aws_instance" "my_vm" {
++ resource "aws_instance" "web_vm" {
+
+Terraform will think it’s a new resource and try to delete the old one and create a new one.
+
+To avoid that, you can move the state like this:
+
+	"terraform state mv aws_instance.my_vm aws_instance.web_vm"
+	
+
+This tells Terraform:
+
+“Hey, the resource is the same — I just renamed it.”
+
+
+
+
+

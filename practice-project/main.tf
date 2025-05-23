@@ -1,3 +1,11 @@
+//defining vriables
+variable "subnet_prefix" {
+  description = "cidr block"
+  #default = 
+  type = string #mekt any daanna puluwan namuth type ek danna hama welema type eka dana eka hodi , any noda
+
+}
+
 provider "aws" {
   region = "eu-north-1"
   access_key = ""
@@ -150,6 +158,15 @@ resource "aws_eip" "one" {
   # associate_with_private_ip = "10.0.0.10"
   depends_on = [ aws_internet_gateway.gateway1 ]
 }
+
+//me output section eken wenne , api terraform apply command ek run krain passe console output eke pennana output ekt apita one krna dewal output krgnna widiyt hdagnna ekai
+//example ekk: apita one api hdpu ec 2 instance ek public ip eka blgnna terraform apply command ek ghuwama output ekedi , so api menna me wage code ekk liynwa output kiyla daala
+//ethkot apit aws console ekt log wewei natanna one nha welwa nasthi kra kra, eka paar aoutput ekn balgtta apita one wade kargtta : example ec2 instance ekt ssh ekn connect wenwa
+output "server_public_ip" {
+  value = aws_eip.one.public_ip
+}
+//dan  apita meke output eka blgnna hamawelama trraform apply command ek ghnnna one unoth eka tikk awl mokda hdpu infrstructure ek awl yynna puluwan
+//ekt krnna one mulinma ghnwa terrafomr refresh command ek, eka ghuwama apply nowi, infrastructure ekt haniyk nowi kelinma output pennanwa 
 
 
 # 9. create ubuntu server and install/enable apache2
